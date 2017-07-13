@@ -51,10 +51,9 @@ function passo(t){
 	if(running){
 		dt = (t-anterior)/1000;
 		requestAnimationFrame(passo);
-	  //ctx.rotate(Math.PI/4);
 		ctx.clearRect(0,0, canvas.width, canvas.height);
 		ctx.save();
-		ctx.translate(canvas.width/2-pc.x, canvas.height/2-pc.y);
+		ctx.translate(Math.floor(canvas.width/2-pc.x), Math.floor(canvas.height/2-pc.y));
 		ctx.scale(1.25,1.25);
 		time = time - 1;
 		if((time <= 0) || (life <= 0) || pc.points == 10)
@@ -68,7 +67,7 @@ function passo(t){
 		ctx.fillText("Lifes: "+life,pc.x,pc.y-50);
 		ctx.fillText("Tempo: "+time,pc.x-42,pc.y-50);
 		anterior = t;
-    ctx.restore();
+    		ctx.restore();
 	}
 	else{
 		ctx.clearRect(0,0, canvas.width, canvas.height);
