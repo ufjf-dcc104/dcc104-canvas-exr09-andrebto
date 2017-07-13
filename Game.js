@@ -39,7 +39,7 @@ function init(){
   ]);
   pc = new Sprite();
   pc.x = 50;
-  pc.y = 320;
+  pc.y = 344;
   time_bar = new Sprite();
   pc.images = images;
   initControls();
@@ -53,18 +53,22 @@ function passo(t){
 		requestAnimationFrame(passo);
 	  //ctx.rotate(Math.PI/4);
 		ctx.clearRect(0,0, canvas.width, canvas.height);
+		ctx.save();
+		ctx.translate(canvas.width/2-pc.x, canvas.height/2-pc.y);
+		ctx.scale(1.25,1.25);
+		time = time - 1;
 		if((time <= 0) || (life <= 0) || pc.points == 10)
 			running = false;
 		pc.mover(map, dt);
-		map.mover(dt);
 		map.desenhar(ctx);
 		pc.desenhar(ctx);
-		ctx.font = "15px Arial";
+		ctx.font = "7px Arial";
 		ctx.fillStyle = "white";
-		ctx.fillText("Points: "+pc.points,40,20);
-		ctx.fillText("Lifes: "+life,120,20);
-		ctx.fillText("Tempo: "+time,300,20);
+		ctx.fillText("Points: "+pc.points,pc.x+32,pc.y-50);
+		ctx.fillText("Lifes: "+life,pc.x,pc.y-50);
+		ctx.fillText("Tempo: "+time,pc.x-42,pc.y-50);
 		anterior = t;
+    ctx.restore();
 	}
 	else{
 		ctx.clearRect(0,0, canvas.width, canvas.height);
@@ -76,7 +80,7 @@ function passo(t){
 		else {
 			ctx.fillText("Você ganhou:",150,200);
 			ctx.fillText(pc.points+" points / Tempo: "+time,130,220);
-		}	
+		}
 	}
 }
 
